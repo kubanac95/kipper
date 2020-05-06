@@ -46,9 +46,8 @@ const App = () => {
 
   if (!user) {
     return (
-      <View>
-        <Text>Login</Text>
-
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={{ marginBottom: 16 }}>Login</Text>
         <Button
           title="Google Sign-In"
           onPress={() =>
@@ -60,8 +59,16 @@ const App = () => {
   }
 
   return (
-    <View>
-      <Text>Welcome {user.email}</Text>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ marginBottom: 16 }}>Welcome {user.email}</Text>
+      <Button
+        title="Logout"
+        onPress={() =>
+          auth()
+            .signOut()
+            .then(() => console.log('User signed out!'))
+        }
+      />
     </View>
   );
 };
