@@ -1,11 +1,13 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import { Text } from 'react-native';
+
+import { NavigationContainer } from '@react-navigation/native';
 
 const App = () => {
   return (
-    <View>
+    <NavigationContainer>
       <Text>Hello world!</Text>
-    </View>
+    </NavigationContainer>
   );
 };
 
