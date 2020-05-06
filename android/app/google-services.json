@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "119018618906",
+    "firebase_url": "https://kipper-77b85.firebaseio.com",
+    "project_id": "kipper-77b85",
+    "storage_bucket": "kipper-77b85.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119018618906:android:c394ad26902fbb4fbc51a3",
+        "android_client_info": {
+          "package_name": "com.kipper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119018618906-bh3kje0dflkhnafgo3889mab8t9ed1oe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnabIrNFObZOdM6ogT4MZa6k4iAcfsEmk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119018618906-bh3kje0dflkhnafgo3889mab8t9ed1oe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
