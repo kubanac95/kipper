@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Image, Text, Button } from 'react-native';
 
+/* packages */
+import * as DocumentPicker from 'expo-document-picker';
+
 /* context */
 import { useAuthenticate } from '../../context/Auth';
 
@@ -11,6 +14,10 @@ const HomeScreen = () => {
     return null;
   }
 
+  const onPickDocument = () => {
+    DocumentPicker.getDocumentAsync().then(console.log).catch(console.log);
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Image
@@ -18,6 +25,7 @@ const HomeScreen = () => {
         style={{ width: 80, height: 80, marginBottom: 16 }}
       />
       <Text style={{ marginBottom: 16 }}>Welcome {user.displayName}</Text>
+      <Button title="Pick" onPress={onPickDocument} />
       <Button title="Logout" onPress={logout} />
     </View>
   );
