@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Image, Text, Button } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -58,9 +58,15 @@ const App = () => {
     );
   }
 
+  console.log(user);
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ marginBottom: 16 }}>Welcome {user.email}</Text>
+      <Image
+        source={{ uri: user.photoURL }}
+        style={{ width: 80, height: 80, marginBottom: 16 }}
+      />
+      <Text style={{ marginBottom: 16 }}>Welcome {user.displayName}</Text>
       <Button
         title="Logout"
         onPress={() =>
