@@ -1,81 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image, Text, Button } from 'react-native';
+import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-community/google-signin';
+import { AuthProvider, useAuthenticate } from './context/Auth';
 
-GoogleSignin.configure({
-  webClientId:
-    '119018618906-bh3kje0dflkhnafgo3889mab8t9ed1oe.apps.googleusercontent.com',
-  scopes: ['profile', 'email'],
-});
+/* pages */
+import * as Pages from './pages';
 
-const App = () => {
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
+const Stack = createStackNavigator();
 
-  function onAuthStateChanged(user) {
-    setUser(user);
-
-    if (initializing) {
-      setInitializing(false);
-    }
-  }
-
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
-  }, []);
-
-  async function onGoogleButtonPress() {
-    // Get the users ID token
-    const { idToken } = await GoogleSignin.signIn();
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
-  }
+const Root = () => {
+  const { initializing, user } = useAuthenticate();
 
   if (initializing) {
     return null;
   }
 
-  if (!user) {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={{ marginBottom: 16 }}>Login</Text>
-        <Button
-          title="Google Sign-In"
-          onPress={() =>
-            onGoogleButtonPress().then(console.log).catch(console.log)
-          }
-        />
-      </View>
-    );
-  }
-
   console.log(user);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Image
-        source={{ uri: user.photoURL }}
-        style={{ width: 80, height: 80, marginBottom: 16 }}
-      />
-      <Text style={{ marginBottom: 16 }}>Welcome {user.displayName}</Text>
-      <Button
-        title="Logout"
-        onPress={() =>
-          auth()
-            .signOut()
-            .then(() => console.log('User signed out!'))
-        }
-      />
-    </View>
+    <Stack.Navigator>
+      {user ? (
+        <Stack.Screen name="Home" component={Pages.Home} />
+      ) : (
+        <Stack.Screen name="Login" component={Pages.Login} />
+      )}
+    </Stack.Navigator>
+  );
+};
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <AuthProvider>
+        <Root />
+      </AuthProvider>
+    </NavigationContainer>
   );
 };
 
